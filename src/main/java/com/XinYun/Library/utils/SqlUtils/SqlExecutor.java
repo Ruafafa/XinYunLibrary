@@ -1,15 +1,8 @@
 package com.XinYun.Library.utils.SqlUtils;
 
 import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.db.sql.SqlUtil;
-import org.apache.poi.ss.formula.functions.T;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import com.XinYun.Library.utils.SqlUtils.ResultSetHandlers.ResultSetHandler;
 import java.sql.*;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -45,14 +38,14 @@ public class SqlExecutor {
      * @param <T>
      * @throws SQLException
      */
-    public static<T> T select(Connection connection, String sql,ResultSetHandler<T> hd,Object... params) throws SQLException {
+    public static<T> T select(Connection connection, String sql, ResultSetHandler<T> hd, Object... params) throws SQLException {
         security(sql);
         //获取statement对象,绑定sql语句
         PreparedStatement ps = connection.prepareStatement(sql);
-        fillParam(connection,ps,sql);
+        fillParam(ps,params);
         ResultSet rs = ps.executeQuery();
         //对结果集进行处理
-        T obj = hd.handler(rs);
+        T obj = (T)hd.handler(rs);
         //关闭资源
         DruidUtil.close(connection,ps,rs);
         return obj;
@@ -65,56 +58,21 @@ public class SqlExecutor {
         security(sql);
         //获取statement对象,绑定sql语句
         PreparedStatement ps = connection.prepareStatement(sql);
-        fillParam(connection,ps,sql);
+        fillParam(ps,params);
         int line = ps.executeUpdate();
         //关闭资源
         DruidUtil.close(connection,ps);
         return line;
     }
 
-    private static void fillParam(Connection connection,PreparedStatement ps,Object... params) throws SQLException {
+    private static void fillParam(PreparedStatement ps,Object... params) throws SQLException {
         //有参数便填充
         if (!(params == null || params.length == 0)){
             int paramIndex = 1;
             for (Object param : params) {
-                setParam(ps, paramIndex++, param);
+                ps.setObject(paramIndex++,param);
             }
         }
     }
 
-    private static void setParam(PreparedStatement ps, int paramIndex, Object param) throws SQLException {
-        if (null == param) {
-            ps.setNull(paramIndex,JDBCType.CHAR.getVendorTypeNumber());
-        }
-        /**
-         * >以下逻辑复制自cn.hutool.db.StatementUtil.setParams<
-         */
-        // 日期特殊处理，默认按照时间戳传入，避免毫秒丢失
-        if (param instanceof java.util.Date) {
-            if (param instanceof java.sql.Date) {
-                ps.setDate(paramIndex, (java.sql.Date) param);
-            } else if (param instanceof java.sql.Time) {
-                ps.setTime(paramIndex, (java.sql.Time) param);
-            } else {
-                ps.setTimestamp(paramIndex, SqlUtil.toSqlTimestamp((java.util.Date) param));
-            }
-            return;
-        }
-        // 针对大数字类型的特殊处理
-        if (param instanceof Number) {
-            if (param instanceof BigDecimal) {
-                // BigDecimal的转换交给JDBC驱动处理
-                ps.setBigDecimal(paramIndex, (BigDecimal) param);
-                return;
-            }
-            if (param instanceof BigInteger) {
-                // BigInteger转为Long
-                ps.setBigDecimal(paramIndex, new BigDecimal((BigInteger) param));
-                return;
-            }
-            // 忽略其它数字类型，按照默认类型传入
-        }
-        // 其它参数类型
-        ps.setObject(paramIndex, param);
-    }
 }

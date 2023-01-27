@@ -1,16 +1,21 @@
 package com.XinYun.Library.utils.SqlUtils.ResultSetHandlers;
 
-import com.XinYun.Library.utils.SqlUtils.ResultSetHandler;
-import org.apache.poi.ss.formula.functions.T;
-
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeanListHandler implements ResultSetHandler{
+public class BeanListHandler<T> implements ResultSetHandler{
         private Class<T> clazz;
+
+        public BeanListHandler() {
+
+        }
+
+        public BeanListHandler(Class<T> clazz) {
+            this.clazz = clazz;
+        }
         @Override
         public List<T> handler(ResultSet resultSet) {
             List<T> list = new ArrayList();

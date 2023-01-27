@@ -23,7 +23,7 @@ public class DruidUtil {
         try {
             //加载配置文件
             Properties properties = new Properties();
-            properties.load(new FileInputStream("src/druid.properties"));
+            properties.load(new FileInputStream("src/main/resources/druid.properties"));
             dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             e.printStackTrace();

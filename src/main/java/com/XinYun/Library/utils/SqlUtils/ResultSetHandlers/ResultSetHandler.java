@@ -1,4 +1,4 @@
-package com.XinYun.Library.utils.SqlUtils;
+package com.XinYun.Library.utils.SqlUtils.ResultSetHandlers;
 
 import java.sql.ResultSet;
 
