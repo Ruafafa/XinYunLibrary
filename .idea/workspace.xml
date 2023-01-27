@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63ffd3f8-9eea-4f9e-9aff-a6b88cd1203d" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/XinYun/Library/utils/WebExcelUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/XinYun/Library/utils/WebExcelUtil.java" afterDir="false" />
-    </list>
+    <list default="true" id="63ffd3f8-9eea-4f9e-9aff-a6b88cd1203d" name="变更" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +77,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
     "last_opened_file_path": "C:/Users/Stayw33/Desktop/新建文件夹/XinYunLibrary",
-    "project.structure.last.edited": "库",
+    "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.30689654",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
@@ -243,7 +240,7 @@
       <workItem from="1674752807729" duration="680000" />
       <workItem from="1674753519709" duration="11000" />
       <workItem from="1674780359722" duration="4247000" />
-      <workItem from="1674786078659" duration="2697000" />
+      <workItem from="1674786078659" duration="2902000" />
     </task>
     <task id="LOCAL-00001" summary="yes">
       <created>1674737906144</created>
@@ -343,7 +340,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674790095247</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="WebExcelUtil工具类修正，添加了bean转xlsx">
+      <created>1674790751947</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1674790751947</updated>
+    </task>
+    <task id="LOCAL-00016" summary="测试servlet修正">
+      <created>1674790919597</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1674790919597</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,6 +364,8 @@
     <MESSAGE value="yes" />
     <MESSAGE value="init" />
     <MESSAGE value="WebExcelUtil工具类更新，添加了map转xlsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="WebExcelUtil工具类更新，添加了map转xlsx" />
+    <MESSAGE value="WebExcelUtil工具类修正，添加了bean转xlsx" />
+    <MESSAGE value="测试servlet修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试servlet修正" />
   </component>
 </project>
