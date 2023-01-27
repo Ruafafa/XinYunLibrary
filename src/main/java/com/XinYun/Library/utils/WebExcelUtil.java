@@ -30,7 +30,10 @@ public class WebExcelUtil {
             excelRudiment.add(row);
             width = row.size();
         }
-        responXlsx(respon,excelName);
+        //xlsx格式输出设置
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+        writer.write(excelRudiment);
+        responXlsx(respon,writer,excelName);
     }
 
     /**
@@ -47,8 +50,31 @@ public class WebExcelUtil {
             excelRudiment.add(row);
             width = row.size();
         }
-        responXlsx(respon,excelName);
+        //xlsx格式输出设置
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+        writer.write(excelRudiment);
+        responXlsx(respon,writer,excelName);
     }
+
+    /**
+     * //注意！:如果为自动下载，检查excelName是否为非中文！
+     * 通过bean输出表格到客户端下载
+     * @param respon 响应
+     * @param excelName 表格名称不能为中文！
+     * @param rows String为表头
+     */
+    public static  <T> void beanToExcel(HttpServletResponse respon, String excelName, T... beans) throws IOException {
+        int width = 0;
+        List<T> excelRudiment = new ArrayList<>();
+        for (T bean : beans) {
+            excelRudiment.add(bean);
+        }
+        //xlsx格式输出设置
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+        writer.write(excelRudiment);
+        responXlsx(respon,writer,excelName);
+    }
+
 
     /**
      * 输出到Servlet
@@ -56,12 +82,10 @@ public class WebExcelUtil {
      * @param excelName
      * @throws IOException
      */
-    private static void responXlsx(HttpServletResponse respon,String excelName) throws IOException {
+    private static void responXlsx(HttpServletResponse respon,ExcelWriter writer,String excelName) throws IOException {
         //设置相应
         respon.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
         respon.setHeader("Content-Disposition","attachment;filename="+excelName+".xlsx");
-        //xlsx格式
-        ExcelWriter writer = ExcelUtil.getWriter(true);
         //输出表格
         ServletOutputStream os = respon.getOutputStream();
         writer.flush(os, true);
