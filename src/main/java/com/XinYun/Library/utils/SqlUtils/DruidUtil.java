@@ -1,4 +1,4 @@
-package com.XinYun.Library.utils;
+package com.XinYun.Library.utils.SqlUtils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import javax.sql.DataSource;
@@ -40,6 +40,23 @@ public class DruidUtil {
     }
 
     /**
+     * 更快速的关闭方式
+     * 修改自HuTool的close源码
+     * --不是很安全
+     * @param ccs
+     */
+    public static void close(AutoCloseable... ccs) {
+        for (AutoCloseable cc : ccs) {
+            if (null != cc) {
+                try {
+                    cc.close();
+                } catch (Exception var2) {
+                }
+            }
+        }
+    }
+
+    /**
      * 仅支持关闭数据库连接
      * @param set
      * @param statement
@@ -62,22 +79,6 @@ public class DruidUtil {
             }
         }catch (SQLException e){
             throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * 更快速的关闭方式
-     * 修改自HuTool的close源码
-     * @param ccs
-     */
-    public static void close(AutoCloseable... ccs) {
-        for (AutoCloseable cc : ccs) {
-            if (null != cc) {
-                try {
-                    cc.close();
-                } catch (Exception var2) {
-                }
-            }
         }
     }
 }
