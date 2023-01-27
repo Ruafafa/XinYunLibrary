@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用于Excel表格的相关操作
+ * 用于Web导出Excel表格的相关操作
  * 基于HuTool的简单封装
  */
 public class WebExcelUtil {
