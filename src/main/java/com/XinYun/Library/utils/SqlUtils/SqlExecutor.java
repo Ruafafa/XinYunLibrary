@@ -1,6 +1,7 @@
 package com.XinYun.Library.utils.SqlUtils;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.db.StatementUtil;
 import com.XinYun.Library.utils.SqlUtils.ResultSetHandlers.ResultSetHandler;
 import java.sql.*;
 import java.util.Scanner;
@@ -42,7 +43,7 @@ public class SqlExecutor {
         security(sql);
         //获取statement对象,绑定sql语句
         PreparedStatement ps = connection.prepareStatement(sql);
-        fillParam(ps,params);
+        StatementUtil.fillParams(ps,params);
         ResultSet rs = ps.executeQuery();
         //对结果集进行处理
         T obj = (T)hd.handler(rs);
@@ -53,19 +54,23 @@ public class SqlExecutor {
 
     /**
      * 修改、删除、添加
+     * @return 返回影响的行数
      */
     public static int update(Connection connection,String sql,Object... params) throws SQLException {
         security(sql);
         //获取statement对象,绑定sql语句
         PreparedStatement ps = connection.prepareStatement(sql);
-        fillParam(ps,params);
+        StatementUtil.fillParams(ps,params);
         int line = ps.executeUpdate();
         //关闭资源
         DruidUtil.close(connection,ps);
         return line;
     }
-
-    private static void fillParam(PreparedStatement ps,Object... params) throws SQLException {
+    /**
+     *  由于该填充方式可能会出现数据缺损
+     *  出于安全性考虑，故舍弃，改用Hutool工具类填充
+     */
+    /*private static void fillParam(PreparedStatement ps,Object... params) throws SQLException {
         //有参数便填充
         if (!(params == null || params.length == 0)){
             int paramIndex = 1;
@@ -73,6 +78,6 @@ public class SqlExecutor {
                 ps.setObject(paramIndex++,param);
             }
         }
-    }
+    }*/
 
 }
