@@ -50,8 +50,8 @@
         </dependency>
         <!--邮件api-->
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
         <!--APi依赖-->
@@ -104,18 +104,4 @@
         </dependency>
     </dependencies>
         <!--项目构建-->
-    <build>
-        <!--插件-->
-        <plugins>
-            <!--汤姆猫9插件 ——调试选用-->
-            <plugin>
-                <groupId>org.opoo.maven</groupId>
-                <artifactId>tomcat9-maven-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <path>$[path]</path>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
